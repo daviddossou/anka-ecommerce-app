@@ -1,8 +1,45 @@
-<h1><%= @product.name %></h1>
-<p><%= @product.price %></p>
-<p><%= @product.description %></p>
-<%= form_with model: @order, remote: false, data: { turbo: false } do |f| %>
-  <%= f.hidden_field :product_id, value: @product.id %>
-  <%= f.hidden_field :amount, value: @product.price %>
-  <%= f.submit "Buy" %>
-<% end %>
+<div class="bg-white py-16">
+  <div class="py-8">
+    <nav aria-label="Breadcrumb">
+      <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <li>
+          <div class="flex items-center">
+            <a href="<%= products_path %>" class="mr-2 text-sm font-medium text-gray-900">Products</a>
+            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="h-5 w-4 text-gray-300">
+              <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+            </svg>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <a href="#" class="mr-2 text-sm font-medium text-gray-900"><%= @product.name %></a>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-x-8">
+      <div class="lg:col-span-5 lg:col-start-1 lg:row-start-1">
+        <%= image_tag @product.image, class: "rounded-lg object-cover object-center", alt: @product.name %>
+      </div>
+      <div class="mt-8 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:mt-0">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= @product.name %></h1>
+        <p class="text-2xl text-gray-900"><%= @product.price %></p>
+        <p class="mt-4 text-gray-500"><%= @product.description %></p>
+        <div class="mt-6">
+          <%= form_with model: @order, remote: false, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <%= f.hidden_field :amount, value: @product.price %>
+            <%= f.submit "Buy", class: "mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <% end %>
+        </div>
+        <div class="mt-10">
+          <h2 class="text-sm font-medium text-gray-900">Description</h2>
+          <p class="text-sm text-gray-500"><%= @product.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

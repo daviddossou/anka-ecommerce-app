@@ -5,8 +5,11 @@ class Webhooks::AnkaPayController < ApplicationController
 
   def receive
     # Handle webhook data here
-    puts "Webhook received!"
-    puts "Webhook data: #{params.inspect}"
+    puts 'Webhook received!'
+    puts "Data: #{params[:data]}"
+    order = Order.find_by(id: params[:data][:attributes][:internal_reference])
+    order.update(status: params[:data][:attributes][:status])
+
     render json: { message: 'Webhook received' }, status: :ok
   end
 end

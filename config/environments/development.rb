@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -19,13 +19,13 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -62,6 +62,19 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Enable serving static assets
+  config.serve_static_assets = true
+
+  # Ensure the asset pipeline is enabled
+  config.assets.enabled = true
+  config.assets.digest = true
+
+  # Add Yarn node_modules folder to the asset load path
+  config.assets.paths << Rails.root.join('node_modules')
+
+  # Precompile additional assets
+  config.assets.precompile += %w[application.tailwind.css]
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -73,4 +86,6 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.hosts << '9ab1-41-85-168-211.ngrok-free.app'
 end

@@ -1,4 +1,42 @@
-<h1>Order Details</h1>
-<p>Product: <%= @order.product.name %></p>
-<p>Amount: <%= @order.amount %></p>
-<p>Status: <%= @order.status %></p>
+<div class="bg-white py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Order Details</h1>
+    </div>
+    <div class="mt-4 flex items-center text-gray-600">
+      <p class="text-sm">Order number <span class="font-medium text-gray-900"><%= @order.id %></span></p>
+      <p class="ml-2 text-sm">•</p>
+      <p class="ml-2 text-sm"><%= @order.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+
+    <div class="mt-6 bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg">
+      <div class="flex p-6">
+        <div class="flex-shrink-0">
+          <%= image_tag @order.product.image, class: "w-48 h-48 rounded-md", alt: @order.product.name %>
+        </div>
+        <div class="ml-6" style="width: 100%;">
+          <h2 class="text-xl font-medium text-gray-900"><%= @order.product.name %></h2>
+          <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+            <%= @order.status %>
+          </span>
+          <p class="mt-2 text-lg font-medium text-gray-900"><%= number_to_currency(@order.amount) %></p>
+          <p class="mt-2 text-gray-500"><%= @order.product.description %></p>
+
+          <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6" style="width: 100%;">
+            <div>
+              <h3 class="text-sm font-medium text-gray-900">Delivery address</h3>
+              <p class="mt-1 text-sm text-gray-600">Floyd Miles</p>
+              <p class="text-sm text-gray-600">7363 Cynthia Pass</p>
+              <p class="text-sm text-gray-600">Toronto, ON N3Y 4H8</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-900">Buyer details</h3>
+              <p class="mt-1 text-sm text-gray-600">f•••@example.com</p>
+              <p class="text-sm text-gray-600">1••••••••40</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
